@@ -6,7 +6,7 @@ Destroy resources with DReAM CLI down command
 
 ```yaml
     - name: Undeploy
-      uses: @novodream/dream-down@main
+      uses: novodream/dream-down@main
       with:
         workspace: staging
         private-key: ${{ secrets.PRIVATE_KEY }}
@@ -28,7 +28,7 @@ steps:
       token: ${{ secrets.DREAM_TOKEN }}
 
   - name: Undeploy
-    uses: @novodream/dream-down@main
+    uses: novodream/dream-down@main
     with:
       workspace: staging
       private-key: ${{ secrets.PRIVATE_KEY }}
