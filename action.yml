@@ -1,0 +1,22 @@
+name: 'Un-Deploy with DReAM CLI'
+description: 'Destroy resources with DReAM CLI down command'
+inputs:
+  workspace:
+    description: 'DReAM workspace to undeploy from'
+    required: true
+  private-key:
+    description: 'DReAM workspace private key'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Un-Deploy
+      env:
+        PRIVATE_KEY: ${{ inputs.private-key }}
+        WORKSPACE: ${{ inputs.workspace }}
+      run: |
+        echo "${PRIVATE_KEY}" > ~/dream-private-${WORKSPACE}.pem
+        dream set-private-key -w ${WORKSPACE} ~/dream-private-${WORKSPACE}.pem
+        dream init -w ${WORKSPACE}
+        dream down
+      shell: "bash"
