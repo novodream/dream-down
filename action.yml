@@ -7,6 +7,9 @@ inputs:
   private-key:
     description: 'DReAM workspace private key'
     required: true
+  flag:
+    description: 'Flag to use for the deployment'
+    required: true
 runs:
   using: "composite"
   steps:
@@ -14,9 +17,10 @@ runs:
       env:
         PRIVATE_KEY: ${{ inputs.private-key }}
         WORKSPACE: ${{ inputs.workspace }}
+        FLAG: ${{ inputs.flag }}
       run: |
         echo "${PRIVATE_KEY}" > ~/dream-private-${WORKSPACE}.pem
         dream set-private-key -w ${WORKSPACE} ~/dream-private-${WORKSPACE}.pem
         dream init -w ${WORKSPACE}
-        dream down
+        dream down ${FLAG}
       shell: "bash"
